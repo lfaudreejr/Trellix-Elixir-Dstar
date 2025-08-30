@@ -1,0 +1,20 @@
+<Layouts.app flash={@flash}>
+  <div
+    class="h-full overflow-auto px-4 py-10 sm:px-6 lg:px-8"
+    style={"background-color: #{@board.color}"}
+    data-signals-board.id={@board.id}
+  >
+    <div id="board-name" class="mx-6 my-4">
+      <button
+        class="text-2xl font-medium block rounded-lg text-left border border-transparent py-1 px-2"
+        data-on-click={"@get('/board/#{@board.id}/name/edit')"}
+      >
+        {@board.name}
+      </button>
+    </div>
+    <div class="flex flex-grow min-h-0 items-start gap-4 px-8 pb-4">
+      <.column :for={col <- @board.columns} column={col} csrf_token={@csrf_token} />
+      <.column_create_button board_id={@board.id} csrf_token={@csrf_token} />
+    </div>
+  </div>
+</Layouts.app>

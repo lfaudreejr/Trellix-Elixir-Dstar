@@ -1,0 +1,37 @@
+<Layouts.app flash={@flash}>
+  <div class="space-y-8 px-4 py-20 sm:px-6 lg:px-8">
+    <div class="w-full sm:w-1/2 lg:w-1/4">
+      <h1 class="font-bold">New Board</h1>
+      <form
+        class="space-y-2"
+        data-ref="new-board-form"
+        data-on-submit="@post('/board', {contentType: 'form'}); $new-board-form.reset();"
+      >
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Name</legend>
+          <input type="text" class="input w-full" placeholder="Type here" name="name" />
+          <input name="_csrf_token" type="hidden" hidden="" value={@csrf_token} />
+        </fieldset>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold">Color</span>
+          <div class="flex-1 flex gap-2 items-center">
+            <input type="color" class="basis-16" name="color" />
+            <button type="submit" class="btn btn-primary flex-1">Create</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="space-y-4">
+      <h2 class="font-bold">Boards</h2>
+      <div id="boards-container" class="flex gap-4">
+        <.board_card
+          :for={board <- @user.boards}
+          id={board.id}
+          name={board.name}
+          color={board.color}
+          csrf_token={@csrf_token}
+        />
+      </div>
+    </div>
+  </div>
+</Layouts.app>
