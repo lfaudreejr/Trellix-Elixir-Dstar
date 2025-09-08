@@ -82,8 +82,9 @@ defmodule Trellix.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind trellix", "esbuild trellix"],
+      "assets.build": ["cmd --cd assets npm ci", "tailwind trellix", "esbuild trellix"],
       "assets.deploy": [
+        "cmd --cd assets npm ci",
         "tailwind trellix --minify",
         "esbuild trellix --minify",
         "phx.digest"
