@@ -7,6 +7,8 @@ defmodule Trellix.CardsTest do
     alias Trellix.Cards.Card
 
     import Trellix.CardsFixtures
+    import Trellix.UsersFixtures
+    import Trellix.ColumnsFixtures
 
     @invalid_attrs %{position: nil, title: nil}
 
@@ -21,11 +23,21 @@ defmodule Trellix.CardsTest do
     end
 
     test "create_card/1 with valid data creates a card" do
-      valid_attrs = %{position: "120.5", title: "some title"}
+      user = user_fixture()
+      column = column_fixture()
+
+      valid_attrs = %{
+        position: "120.5",
+        title: "some title",
+        user_id: user.id,
+        column_id: column.id
+      }
 
       assert {:ok, %Card{} = card} = Cards.create_card(valid_attrs)
       assert card.position == Decimal.new("120.5")
       assert card.title == "some title"
+      assert card.user_id == user.id
+      assert card.column_id == column.id
     end
 
     test "create_card/1 with invalid data returns error changeset" do

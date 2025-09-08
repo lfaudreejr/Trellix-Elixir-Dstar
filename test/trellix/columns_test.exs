@@ -7,6 +7,8 @@ defmodule Trellix.ColumnsTest do
     alias Trellix.Columns.Column
 
     import Trellix.ColumnsFixtures
+    import Trellix.UsersFixtures
+    import Trellix.BoardsFixtures
 
     @invalid_attrs %{name: nil, position: nil}
 
@@ -21,11 +23,15 @@ defmodule Trellix.ColumnsTest do
     end
 
     test "create_column/1 with valid data creates a column" do
-      valid_attrs = %{name: "some name", position: "120.5"}
+      user = user_fixture()
+      board = board_fixture()
+      valid_attrs = %{name: "some name", position: "120.5", user_id: user.id, board_id: board.id}
 
       assert {:ok, %Column{} = column} = Columns.create_column(valid_attrs)
       assert column.name == "some name"
       assert column.position == Decimal.new("120.5")
+      assert column.user_id == user.id
+      assert column.board_id == board.id
     end
 
     test "create_column/1 with invalid data returns error changeset" do

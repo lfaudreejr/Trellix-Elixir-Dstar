@@ -7,6 +7,8 @@ defmodule Trellix.Boards do
   alias Trellix.Repo
 
   alias Trellix.Boards.Board
+  alias Trellix.Columns.Column
+  alias Trellix.Cards.Card
 
   @doc """
   Returns the list of trellix_boards.
@@ -36,6 +38,31 @@ defmodule Trellix.Boards do
 
   """
   def get_board!(id), do: Repo.get!(Board, id)
+
+  @doc """
+  Gets a single user board
+
+  Returns nil if no board found
+
+  ## Examples
+
+      iex> get_user_board(123, userid)
+      %Board{}
+  """
+  def get_user_board(id, user_id) do
+    cards_query = from(card in Card, order_by: [asc: card.position])
+
+    columns_query =
+      from(c in Column,
+        order_by: [asc: c.position],
+        preload: [cards: ^cards_query]
+      )
+
+    Board
+    |> where([b], b.user_id == ^user_id)
+    |> preload(columns: ^columns_query)
+    |> Repo.get(id)
+  end
 
   @doc """
   Creates a board.

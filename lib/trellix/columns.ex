@@ -7,6 +7,7 @@ defmodule Trellix.Columns do
   alias Trellix.Repo
 
   alias Trellix.Columns.Column
+  alias Trellix.Cards.Card
 
   @doc """
   Returns the list of trellix_columns.
@@ -36,6 +37,14 @@ defmodule Trellix.Columns do
 
   """
   def get_column!(id), do: Repo.get!(Column, id)
+
+  def get_user_column(id, user_id) do
+    cards_query = from(c in Card, order_by: [asc: c.position])
+
+    Column
+    |> preload(cards: ^cards_query)
+    |> Repo.get_by(id: id, user_id: user_id)
+  end
 
   @doc """
   Creates a column.

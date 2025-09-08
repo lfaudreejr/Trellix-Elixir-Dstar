@@ -4,17 +4,23 @@ defmodule Trellix.CardsFixtures do
   entities via the `Trellix.Cards` context.
   """
 
+  import Trellix.UsersFixtures
+  import Trellix.ColumnsFixtures
+
   @doc """
   Generate a card.
   """
   def card_fixture(attrs \\ %{}) do
+    user = user_fixture()
+    column = column_fixture()
+
     {:ok, card} =
       attrs
       |> Enum.into(%{
         position: "120.5",
         title: "some title",
-        user_id: 123,
-        column_id: 123
+        user_id: user.id,
+        column_id: column.id
       })
       |> Trellix.Cards.create_card()
 

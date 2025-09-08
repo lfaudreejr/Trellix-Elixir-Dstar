@@ -14,7 +14,77 @@
    curl -sLO https://github.com/saadeghi/daisyui/releases/latest/download/daisyui.js
    Make sure to look at the daisyUI changelog: https://daisyui.com/docs/changelog/ */
 @plugin "../vendor/daisyui" {
-  themes: lofi --default, black --prefersdark;
+  themes: false;
+}
+
+@plugin "../vendor/daisyui-theme" {
+  name: "light";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98.5% 0 0);
+  --color-base-200: oklch(97% 0 0);
+  --color-base-300: oklch(92.2% 0 0);
+  --color-base-content: oklch(13% 0.028 261.692);
+  --color-primary: oklch(68% 0.169 237.323);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(92% 0 0);
+  --color-secondary-content: oklch(14% 0 0);
+  --color-accent: oklch(70% 0.213 47.604);
+  --color-accent-content: oklch(26% 0.079 36.259);
+  --color-neutral: oklch(98% 0 0);
+  --color-neutral-content: oklch(14% 0 0);
+  --color-info: oklch(95% 0.026 236.824);
+  --color-info-content: oklch(50% 0.134 242.749);
+  --color-success: oklch(96% 0.044 156.743);
+  --color-success-content: oklch(52% 0.154 150.069);
+  --color-warning: oklch(97% 0.071 103.193);
+  --color-warning-content: oklch(55% 0.135 66.442);
+  --color-error: oklch(88% 0.062 18.334);
+  --color-error-content: oklch(50% 0.213 27.518);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.28125rem;
+  --size-field: 0.28125rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "../vendor/daisyui-theme" {
+  name: "dark";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: oklch(13% 0.028 261.692);
+  --color-base-200: oklch(21% 0.034 264.665);
+  --color-base-300: oklch(27% 0.033 256.848);
+  --color-base-content: oklch(96% 0.003 264.542);
+  --color-primary: oklch(58% 0.158 241.966);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(96% 0.003 264.542);
+  --color-secondary-content: oklch(13% 0.028 261.692);
+  --color-accent: oklch(87% 0.01 258.338);
+  --color-accent-content: oklch(0% 0 0);
+  --color-neutral: oklch(44% 0.03 256.802);
+  --color-neutral-content: oklch(98% 0.002 247.839);
+  --color-info: oklch(95% 0.045 203.388);
+  --color-info-content: oklch(52% 0.105 223.128);
+  --color-success: oklch(96% 0.044 156.743);
+  --color-success-content: oklch(52% 0.154 150.069);
+  --color-warning: oklch(97% 0.071 103.193);
+  --color-warning-content: oklch(55% 0.135 66.442);
+  --color-error: oklch(93% 0.032 17.717);
+  --color-error-content: oklch(50% 0.213 27.518);
+  --radius-selector: 0rem;
+  --radius-field: 0.25rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
 
 /* Add variants based on LiveView classes */

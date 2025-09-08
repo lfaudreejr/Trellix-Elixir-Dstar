@@ -38,6 +38,22 @@ defmodule Trellix.Users do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
+  Gets a single user by session_id field
+
+  Returns nil if no user is found
+
+  ## Examples
+      iex> get_user_by_session_id(123)
+      %User{}
+  """
+  def get_user_by_session_id(session_id) do
+    User
+    |> preload(:boards)
+    |> where([u], u.session_id == ^session_id)
+    |> Repo.one()
+  end
+
+  @doc """
   Creates a user.
 
   ## Examples

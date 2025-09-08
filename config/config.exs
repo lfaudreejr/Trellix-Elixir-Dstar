@@ -25,6 +25,7 @@ config :trellix, TrellixWeb.Endpoint,
 config :mime, :types, %{
   "text/event-stream" => ["sse"]
 }
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

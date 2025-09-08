@@ -12,6 +12,7 @@ defmodule Trellix.Application do
       Trellix.Repo,
       {DNSCluster, query: Application.get_env(:trellix, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Trellix.PubSub},
+      {Registry, [keys: :unique, name: Trellix.Registry]},
       # Start a worker by calling: Trellix.Worker.start_link(arg)
       # {Trellix.Worker, arg},
       # Start to serve requests, typically the last entry

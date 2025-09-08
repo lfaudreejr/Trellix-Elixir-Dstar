@@ -7,6 +7,7 @@ defmodule Trellix.BoardsTest do
     alias Trellix.Boards.Board
 
     import Trellix.BoardsFixtures
+    import Trellix.UsersFixtures
 
     @invalid_attrs %{name: nil, color: nil}
 
@@ -21,12 +22,13 @@ defmodule Trellix.BoardsTest do
     end
 
     test "create_board/1 with valid data creates a board" do
-      valid_attrs = %{name: "some name", color: "some color", user_id: "123"}
+      user = user_fixture()
+      valid_attrs = %{name: "some name", color: "some color", user_id: user.id}
 
       assert {:ok, %Board{} = board} = Boards.create_board(valid_attrs)
       assert board.name == "some name"
       assert board.color == "some color"
-      assert board.user_id == "123"
+      assert board.user_id == user.id
     end
 
     test "create_board/1 with invalid data returns error changeset" do
@@ -35,12 +37,18 @@ defmodule Trellix.BoardsTest do
 
     test "update_board/2 with valid data updates the board" do
       board = board_fixture()
-      update_attrs = %{name: "some updated name", color: "some updated color", user_id: "456"}
+      other_user = user_fixture()
+
+      update_attrs = %{
+        name: "some updated name",
+        color: "some updated color",
+        user_id: other_user.id
+      }
 
       assert {:ok, %Board{} = board} = Boards.update_board(board, update_attrs)
       assert board.name == "some updated name"
       assert board.color == "some updated color"
-      assert board.user_id == "456"
+      assert board.user_id == other_user.id
     end
 
     test "update_board/2 with invalid data returns error changeset" do

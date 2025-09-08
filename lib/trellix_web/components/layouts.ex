@@ -43,7 +43,9 @@ defmodule TrellixWeb.Layouts do
       <div class="flex-none">
         <ul class="flex flex-column px-1 space-x-4 items-center">
           <li>
-            <a href="https://github.com/lfaudreejr/Trellix-Elixir-Dstar" class="btn btn-ghost">GitHub</a>
+            <a href="https://github.com/lfaudreejr/Trellix-Elixir-Dstar" class="btn btn-ghost">
+              GitHub
+            </a>
           </li>
           <li>
             <.theme_toggle />
@@ -52,7 +54,7 @@ defmodule TrellixWeb.Layouts do
       </div>
     </header>
 
-    <main class="flex-1 p-4 sm:p-6 lg:p-8" data-on-load="@get('/sse')">
+    <main class="flex-1" data-on-load="@get('/sse')">
       {render_slot(@inner_block)}
     </main>
     """
@@ -85,7 +87,7 @@ defmodule TrellixWeb.Layouts do
   def theme_toggle(assigns) do
     ~H"""
     <div class="card relative flex flex-row items-center border-2 border-base-300 bg-base-300 rounded-full">
-      <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 brightness-200 left-0 [[data-theme=light]_&]:left-1/3 [[data-theme=black]_&]:left-2/3 transition-[left]" />
+      <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 brightness-200 left-0 [[data-theme=light]_&]:left-1/3 [[data-theme=dark]_&]:left-2/3 transition-[left]" />
 
       <button
         class="flex p-2 cursor-pointer w-1/3"
@@ -103,7 +105,7 @@ defmodule TrellixWeb.Layouts do
 
       <button
         class="flex p-2 cursor-pointer w-1/3"
-        data-phx-theme="black"
+        data-phx-theme="dark"
       >
         <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>

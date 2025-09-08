@@ -87,6 +87,9 @@ defmodule TrellixWeb do
       # Core UI components
       import TrellixWeb.CoreComponents
 
+      import TrellixWeb.BoardComponents
+      import TrellixWeb.ColumnComponents
+
       # Common modules used in templates
       alias Phoenix.LiveView.JS
       alias TrellixWeb.Layouts
